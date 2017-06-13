@@ -17,6 +17,9 @@ const client = new line.Client(config);
 // about Express itself: https://expressjs.com/
 const app = express();
 
+// 雑談対話APIのcontext
+let context = null;
+
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
 app.post('/webhook', line.middleware(config), (req, res) => {
@@ -32,8 +35,14 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
 
+  // 雑談対話APIを叩く
+  const dialogue = util.dialogue(event.message.text);
+
+  // context更新
+  context = dialogue.context;
+
   // create a echoing text message
-  const echo = { type: 'text', text: util.dialogue(event.message.text) };
+  const echo = { type: 'text', text: dialogue.text };
 
   // use reply API
   return client.replyMessage(event.replyToken, echo);
