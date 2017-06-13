@@ -36,7 +36,8 @@ function handleEvent(event) {
   }
 
   // 雑談対話APIを叩く
-  const dialogue = util.dialogue(event.message.text);
+  console.info('context:', context);
+  const dialogue = util.dialogue(event.message.text, context);
 
   // context更新
   context = dialogue.context;
