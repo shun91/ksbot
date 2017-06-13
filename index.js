@@ -2,6 +2,7 @@
 
 const line = require('@line/bot-sdk');
 const express = require('express');
+const util = require('./src/util');
 
 // create LINE SDK config from env variables
 const config = {
@@ -32,7 +33,7 @@ function handleEvent(event) {
   }
 
   // create a echoing text message
-  const echo = { type: 'text', text: event.message.text };
+  const echo = { type: 'text', text: util.dialogue(event.message.text) };
 
   // use reply API
   return client.replyMessage(event.replyToken, echo);
