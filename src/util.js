@@ -20,7 +20,7 @@ module.exports = {
       text: body.utt,
       context: body.context
     };
-  }
+  },
 
   /**
    * Y!画像検索に関する関数群
@@ -84,9 +84,7 @@ module.exports = {
         const p = data.message.replace('@' + account, '');
         // 画像検索して発言
         // メッセージは、this.fetchUrlRandom(p)
-        });
       }
-
     }
   }
 }
