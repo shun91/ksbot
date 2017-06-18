@@ -35,8 +35,13 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
 
+  const img_str = ['画像', 'image', 'img'];
+  if (event.message.text.match(new RegExp(img_str.join('|')))) {
+    const url = util.ImgSearch.fetchUrlRandom(event.message.text);
+    return client.replyMessage(event.replyToken, url);
+  }
+
   // 雑談対話APIを叩く
-  console.info('context:', context);
   const dialogue = util.dialogue(event.message.text, context);
 
   // context更新
