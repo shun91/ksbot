@@ -38,6 +38,7 @@ function handleEvent(event) {
   const img_str = ['画像', 'image', 'img'];
   if (event.message.text.match(new RegExp(img_str.join('|')))) {
     const url = util.ImgSearch.fetchUrlRandom(event.message.text);
+    console.log(url);
     return client.replyMessage(event.replyToken, {
       'type': 'image',
       'originalContentUrl': url,
